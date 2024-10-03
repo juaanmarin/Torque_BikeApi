@@ -2,9 +2,12 @@
     class bikesController{
         
         public function index(){
+
+            $cousrses = bikesModel::index('bikes');;
+
             $json=array(
                 'Detail' => 'BikesController : index()',
-                'message' => 'this is index of bikes controller'
+                'message' => $cousrses
             );
 
             echo json_encode($json);
