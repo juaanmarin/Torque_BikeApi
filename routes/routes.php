@@ -35,9 +35,15 @@
             //cuando se hace peticiones desde registro
             if (array_filter($arrRoutes)[3] == 'register') {
 
-                if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'GET'){
+                if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                    $data = array(  'name' => $_POST['name'],
+                                    'lastName' => $_POST['lastName'],
+                                    'email' => $_POST['email']);
+
+
                     $client = new clientController();
-                    $client->create();
+                    $client->create($data);
                 }
 
             }
