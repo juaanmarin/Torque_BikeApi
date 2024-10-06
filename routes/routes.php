@@ -41,7 +41,6 @@
                                     'lastName' => $_POST['lastName'],
                                     'email' => $_POST['email']);
 
-
                     $client = new clientController();
                     $client->create($data);
                 }

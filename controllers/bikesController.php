@@ -3,11 +3,11 @@
         
         public function index(){
 
-            $cousrses = bikesModel::index('bikes');;
+            $bikes = bikesModel::index('bikes');;
 
             $json=array(
                 'Detail' => 'BikesController : index()',
-                'message' => $cousrses
+                'message' => $bikes
             );
 
             echo json_encode($json);

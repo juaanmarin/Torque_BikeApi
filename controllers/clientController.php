@@ -29,6 +29,17 @@
                     'Detail' => 'Error: Invalid email format',
                 );
             }
+            //validar email repetido
+            $clients = clientModel::index('user');
+
+            foreach ($clients as $key => $value) {
+                if($value['email'] == $data['email']){
+                    $json=array(
+                        'Status' => 404,
+                        'Detail' => 'this email exist in bd',
+                    );
+                }
+            }
 
             echo json_encode($json);
 
