@@ -39,9 +39,32 @@
                         'Detail' => 'this email exist in bd',
                     );
                 }
+
             }
+            
+            //generar hash para el id
+            $hashid =  hash_hmac('sha256', $data['name'].$data['lastName'].$data['email'], '');
+            $idclient = substr(base64_encode($hashid), 0, 32);
+
+            //generar hash para la key
+            $hashKey = hash_hmac('sha256', $data['email'].$data['lastName'].$data['name'], '');
+            $secretKey = substr(base64_encode($hashKey), 0, 32);
+
+
+            $arrCreation = array(
+                'name' => $data['name'],
+                'lastName' => $data['lastName'],
+                'email' => $data['email'],
+                'idclient' => $idclient,
+                'secretKey'=> $secretKey,
+                'created' => date('Y/m/d h:i:s'),
+                'upate' => date('Y/m/d h:i:s')
+            );
+
+            $create = clientModel::create('user', $arrCreation);
 
             echo json_encode($json);
+            return;
 
         }
         

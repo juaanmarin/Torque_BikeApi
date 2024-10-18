@@ -15,6 +15,13 @@
 
         }
 
+        static public function create($table, $data){
+
+            $stmt = conection::conect()->prepare("INSERT INTO user (id_user, first_name, last_name, email, secret_key) values (:id_user, :first_name, :last_name, :email, :secret_key)"); 
+            
+        
+        }
+
     }
 
 ?>
