@@ -4,6 +4,7 @@
         public function create($data){
 
             $json=array(
+                'Status' => '',
                 'Detail' => 'ClientController : create()',
                 'data' => $data
             );
@@ -58,11 +59,22 @@
                 'idclient' => $idclient,
                 'secretKey'=> $secretKey,
                 'created' => date('Y/m/d h:i:s'),
-                'upate' => date('Y/m/d h:i:s')
+                'update' => date('Y/m/d h:i:s')
             );
 
-            $create = clientModel::create('user', $arrCreation);
+            if ($json['Status'] != 404) {
+                $create = clientModel::create('user', $arrCreation);
+                
+                if ($create == 'OK') {
+                    $json=array(
+                        'Status' => 200,
+                        'Detail' => 'created success',
+                        'Data' => $arrCreation
+                    );
+                }
+            }
 
+            
             echo json_encode($json);
             return;
 
