@@ -3,7 +3,20 @@
         
         public function index(){
 
-            $bikes = bikesModel::index('bikes');;
+            $bikes = 'Not auth';
+
+            //autenticacion de usuario 
+            if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+
+                //se consultan todos los usuarios
+                $client = clientModel::index('user');
+                //si los id coinsiden se buscan los datos de todas las bikes 
+                foreach ($client as $key => $value) {
+                    if ($_SERVER['PHP_AUTH_USER'].':'.$_SERVER['PHP_AUTH_PW'] == $value['id_user'].':'.$value['secret_key']) {
+                        $bikes = bikesModel::index('bikes');
+                    }
+                }   
+            }
 
             $json=array(
                 'Detail' => 'BikesController : index()',
