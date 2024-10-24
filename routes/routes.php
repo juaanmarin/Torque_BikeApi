@@ -23,8 +23,15 @@
             if (array_filter($arrRoutes)[3] == 'bikes') {
 
                 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST')  {
+
+                    $data = array(  'mark' => $_POST['mark'],
+                                    'model' => $_POST['model'],
+                                    'cc' => $_POST['cc'],
+                                    'year' => $_POST['year'],
+                                    'descript' => $_POST['descript']);
+
                     $bikes = new bikesController();
-                    $bikes->create();
+                    $bikes->create($data);
                 }elseif (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
                     $bikes = new bikesController();
                     $bikes->index();
